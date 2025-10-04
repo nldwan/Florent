@@ -1,0 +1,166 @@
+body {
+	background-color: #f8f9fa;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	color: #1f2937;
+}
+  
+.navbar-custom {
+	background-color: rgba(255, 255, 255, 0.8) !important;
+	backdrop-filter: blur(12px);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+  
+.hero-section {
+	background: linear-gradient(135deg, #D9EAFD 0%, #FFF2E0 100%);
+	display: flex;
+	align-items: center;
+	padding-top: 100px;
+	padding-bottom: 0;
+}
+
+.hero-img {
+	width: 100%;
+	max-width: 500px;
+	object-fit: contain;
+	align-self: flex-end; /* biar mentok ke bawah */
+}  
+
+.img-fluid {
+	max-width: 400px;
+	height: auto;
+}
+  
+.btn-cyan {
+	background-color: #0891b2;
+	border-color: #0891b2;
+	color: white;
+}
+  
+.btn-cyan:hover {
+	background-color: #155e75;
+	border-color: #155e75;
+	color: white;
+}
+
+.text-cyan {
+	color: #0891b2 !important;
+}
+  
+.text-amber {
+	color: #d97706 !important;
+}
+  
+.bg-zinc-300 {
+	background-color: #d4d4d8;
+}
+  
+.whatsapp-float {
+	position: fixed;
+	right: 2rem;
+	bottom: 4.5rem;
+	z-index: 1050;
+	width: 4.5rem;
+	height: 4.5rem;
+	background-color: #22c55e;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-decoration: none;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	transition: all 0.3s ease;
+}
+  
+.whatsapp-float:hover {
+	transform: scale(1.1);
+	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+	color: white;
+}
+  
+.card-hover {
+	transition: all 0.3s ease;
+}
+  
+.card-hover:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+  
+.navbar-nav .nav-link:hover {
+	color: #0891b2 !important;
+}
+
+footer {
+	background: #e6e8eb;
+	font-family: Arial, sans-serif;
+	padding-top: 2em;
+}
+
+footer .container {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+footer h6 {
+	color: #4d788a;
+	font-weight: bold;
+	margin-bottom: 20px;
+	text-transform: uppercase;
+}
+
+footer p {
+	color: #000000;
+	line-height: 1.6;
+}
+
+footer .text-reset {
+	color: #000000 !important;
+	text-decoration: none;
+	transition: color 0.3s;
+	font-weight: 500;
+}
+
+footer .text-reset:hover {
+	color: #4d788a !important;
+}
+
+footer .btn-outline {
+	border-color: #4d788a;
+	color: #4d788a;
+	transition: background-color 0.3s, color 0.3s;
+	font-size: 20px;
+	margin-right: 10px;
+	padding: 10px 15px;
+	border-radius: 50%;
+}
+
+footer .btn-outline:hover {
+	background-color: #7bbbd6;
+	color: #fff;
+}
+
+footer .text-center p {
+	color: #12191c;
+	margin-bottom: 0;
+}
+
+.btn-twitter {
+	background-color: #000;
+	color: #fff;
+}
+
+.btn-twitter:hover {
+	background-color: transparent;
+	color: #000;
+}
+
+.btn-instagram {
+	background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+	color: #fff;
+	border: none;
+}
+
+.btn-instagram:hover {
+	background-color: transparent;
+	color: #000;
+}
