@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Vocabularies;
+use App\Models\Vocabulary;
 
 class VocabularyController extends Controller
 {
     // Tampilkan semua vocabulary
     public function index()
     {
-        $vocabularies = Vocabularies::all();
+        $vocabularies = Vocabulary::all();
         return view('vocabularies.index', compact('vocabularies'));
     }
 

@@ -32,13 +32,22 @@ body {
   
 .btn-cyan {
 	background-color: #0891b2;
-	border-color: #0891b2;
 	color: white;
 }
   
 .btn-cyan:hover {
-	background-color: #155e75;
-	border-color: #155e75;
+	border: 2px solid #0891b2;
+	background-color: transparent;
+}
+
+
+.btn-outline-cyan {
+	border: 2px solid #0891b2;
+	background-color: transparent;
+}
+
+.btn-outline-cyan:hover {
+	background-color: #0891b2;
 	color: white;
 }
 

@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Materials;
+use App\Models\Material;
 
 class MaterialController extends Controller
 {
     public function index()
     {
-        $materials = Materials::all();
+        $materials = Material::all();
         return view('materials.index', compact('materials'));
     }
 
@@ -23,7 +23,7 @@ class MaterialController extends Controller
 
         $filePath = $request->file('file')->store('materials');
 
-        Materials::create([
+        Material::create([
             'title' => $request->title,
             'file' => $filePath,
         ]);

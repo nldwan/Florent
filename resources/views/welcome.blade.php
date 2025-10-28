@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Florent</title>
+	<title>{{ config('app.name', 'Florent') }}</title>
   <link rel="icon" href="{{ asset('images/favicon.png') }}" type="image/png">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -27,6 +27,9 @@
       <!-- Menu -->
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item ms-2">
+            <a href="{{ route('register') }}" class="btn btn-outline-cyan px-3 py-2">Register</a>
+          </li>
           <li class="nav-item ms-2">
             <a href="{{ route('login') }}" class="btn btn-cyan px-3 py-2">Login</a>
           </li>
@@ -120,24 +123,24 @@
         <div class="col-md-4">
           <div class="card border-0 shadow card-hover" style="background-color: rgba(255, 255, 255, 0.8);">
             <div class="card-body text-center p-4">
-              <h4 class="h5 fw-semibold text-amber">Speaking Mastery</h4>
-              <p class="text-muted mt-2">Tingkatkan kemampuan berbicara dengan cara yang natural dan percaya diri.</p>
+              <h4 class="h5 fw-semibold text-amber">Kid Program</h4>
+              <p class="text-muted mt-2">Program ini dirancang untuk siswa Sekolah Dasar (SD) yang ingin belajar bahasa inggris dengan cara menyenangkan dan interaktif.</p>
             </div>
           </div>
         </div>
         <div class="col-md-4">
           <div class="card border-0 shadow card-hover" style="background-color: rgba(255, 255, 255, 0.8);">
             <div class="card-body text-center p-4">
-              <h4 class="h5 fw-semibold text-amber">Grammar Essentials</h4>
-              <p class="text-muted mt-2">Pelajari grammar dengan cara yang mudah dipahami tanpa ribet.</p>
+              <h4 class="h5 fw-semibold text-amber">Teen & Youth Program</h4>
+              <p class="text-muted mt-2">Program ini membantu bagi remaja (SMP & SMA) meningkatkan kemampuan bahasa inggris baik keperluan sosial komunikasi dan kebutuhan masa depan.</p>
             </div>
           </div>
         </div>
         <div class="col-md-4">
           <div class="card border-0 shadow card-hover" style="background-color: rgba(255, 255, 255, 0.8);">
             <div class="card-body text-center p-4">
-              <h4 class="h5 fw-semibold text-amber">TOEFL/IELTS Prep</h4>
-              <p class="text-muted mt-2">Persiapkan dirimu untuk ujian internasional dengan strategi efektif.</p>
+              <h4 class="h5 fw-semibold text-amber">TOEFL Preparation</h4>
+              <p class="text-muted mt-2">Program ini membantu mempersiapkan diri untuk menghadapi tes TOEFL dengan strategi dan teknik yang efektif.</p>
             </div>
           </div>
         </div>
@@ -181,14 +184,14 @@
         <div class="col-md-4 mb-4">
           <h6>Navigasi</h6>
           <p><a href="#home" class="text-reset">HOME</a></p>
-          <p><a href="#biodata" class="text-reset">ABOUT</a></p>
-          <p><a href="#pendidikan" class="text-reset">COURSES</a></p>
-          <p><a href="#hobi" class="text-reset">LOCATION</a></p>
+          <p><a href="#about" class="text-reset">ABOUT</a></p>
+          <p><a href="#courses" class="text-reset">COURSES</a></p>
+          <p><a href="#location" class="text-reset">LOCATION</a></p>
         </div>
         <div class="col-md-4 mb-4">
           <h6>Contact</h6>
-          <p><i class="fas fa-home me-2"></i> Dukuh Kupang Barat 31</p>
-          <p><i class="fas fa-envelope me-2"></i> neladwian@gmail.com</p>
+          <p><i class="fas fa-home me-2"></i> Pendidikan Muda No.31</p>
+          <p><i class="fas fa-envelope me-2"></i> florent@mail.com</p>
           <p><i class="fas fa-phone me-2"></i> +62 896 1523 6674</p>
         </div>
       </div>
@@ -216,56 +219,7 @@
   <div class="text-center p-4 bg-dark text-light">
     &copy; 2025 Florent English Course. All Rights Reserved.
   </div>
-  </footer>
-  <!-- <footer class="bg-zinc-300 py-5">
-    <div class="container">
-      <div class="row g-4">
-
-        <div class="col-md-4">
-          <h2 class="h4 fw-bold">Florent English Course</h2>
-          <p class="mt-3 text-dark">
-            Kursus Bahasa Inggris terpercaya untuk meningkatkan kemampuan Bahasa Inggris dengan metode modern dan interaktif.
-          </p>
-        </div>
-
-        <div class="col-md-4">
-          <h3 class="h5 fw-semibold mb-3">Navigation</h3>
-          <ul class="list-unstyled">
-            <li class="mb-2"><a href="/" class="text-dark text-decoration-none">Home</a></li>
-            <li class="mb-2"><a href="#about" class="text-dark text-decoration-none">About</a></li>
-            <li class="mb-2"><a href="#courses" class="text-dark text-decoration-none">Courses</a></li>
-            <li class="mb-2"><a href="#contact" class="text-dark text-decoration-none">Contact</a></li>
-          </ul>
-        </div>
-
-        <div class="col-md-4">
-          <h3 class="h5 fw-semibold mb-3">Hubungi Kami</h3>
-          <ul class="list-unstyled">
-            <li class="mb-3 d-flex align-items-start">
-              <i class="fas fa-map-marker-alt text-cyan me-3 mt-1"></i>
-              <span>Jl. Pendidikan No.123, Suarabaya</span>
-            </li>
-            <li class="mb-3 d-flex align-items-center">
-              <i class="fas fa-phone text-cyan me-3"></i>
-              <a href="tel:+628179369954" class="text-dark text-decoration-none">+62 817-936-9954</a>
-            </li>
-            <li class="mb-3 d-flex align-items-center">
-              <i class="fas fa-envelope text-cyan me-3"></i>
-              <a href="mailto:info@florent.com" class="text-dark text-decoration-none">info@florent.com</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="bg-dark">
-      <div class="container">
-        <div class="text-center text-light">
-          &copy; 2025 Florent English Course. All Rights Reserved.
-        </div>
-      </div>
-    </div>
-  </footer> -->
+</footer>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

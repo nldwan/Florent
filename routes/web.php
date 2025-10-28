@@ -11,13 +11,21 @@ Route::get('/', function () {
 
 // Setelah login
 Route::middleware(['auth'])->group(function () {
+
+    // Siswa
     Route::get('/siswa/dashboard', [SiswaController::class, 'index'])->name('siswa.dashboard');
     Route::get('/siswa/materi', [SiswaController::class, 'materi'])->name('siswa.materi');
     Route::get('/siswa/vocabulary', [SiswaController::class, 'vocabulary'])->name('siswa.vocabulary');
+    Route::get('/siswa/grade', [SiswaController::class, 'grade'])->name('siswa.grade');
     Route::get('/profile', function () {
-        return view('profile.edit'); // bikin file resources/views/profile/edit.blade.php
+        return view('profile.edit');
     })->name('profile.edit');
+
+    // Admin
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    // Route::resource('/admin/materi', MateriController::class);
+    // Route::resource('/admin/vocabulary', VocabularyController::class);
+    // Route::resource('/admin/grade', GradeController::class);
 });
 
 require __DIR__.'/auth.php';

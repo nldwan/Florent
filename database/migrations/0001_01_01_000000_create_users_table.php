@@ -13,9 +13,17 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('username')->unique(); // username unik
-            $table->string('password'); // password
-            $table->enum('role', ['admin', 'siswa'])->default('siswa'); // role
+
+            // Data pendaftaran siswa
+            $table->string('name'); // nama lengkap
+            $table->string('email')->unique(); // email unik untuk login
+            $table->string('kelas'); // kids / teen / toefl
+            $table->string('no_hp'); // nomor HP
+
+            // Login dan hak akses
+            $table->string('password');
+            $table->enum('role', ['admin', 'siswa'])->default('siswa');
+
             $table->timestamps();
         });
     }
