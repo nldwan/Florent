@@ -16,6 +16,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/siswa/dashboard', [SiswaController::class, 'index'])->name('siswa.dashboard');
     Route::get('/siswa/materi', [SiswaController::class, 'materi'])->name('siswa.materi');
     Route::get('/siswa/vocabulary', [SiswaController::class, 'vocabulary'])->name('siswa.vocabulary');
+    Route::get('/siswa/conversation', [SiswaController::class, 'conversation'])->name('siswa.conversation');
     Route::get('/siswa/grade', [SiswaController::class, 'grade'])->name('siswa.grade');
     Route::get('/profile', function () {
         return view('profile.edit');

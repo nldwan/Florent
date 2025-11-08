@@ -11,13 +11,13 @@ class VocabularyController extends Controller
     public function index()
     {
         $vocabularies = Vocabulary::all();
-        return view('vocabularies.index', compact('vocabularies'));
+        return view('siswa.vocabulary', compact('vocabularies'));
     }
 
     // Filter berdasarkan type: noun, verb, adjective, adverb
     public function filterByType($type)
     {
         $vocabularies = Vocabularies::where('type', $type)->get();
-        return view('vocabularies.index', compact('vocabularies'));
+        return view('siswa.vocabulary', compact('vocabularies'));
     }
 }

@@ -17,7 +17,7 @@ return new class extends Migration
             // Data pendaftaran siswa
             $table->string('name'); // nama lengkap
             $table->string('email')->unique(); // email unik untuk login
-            $table->string('kelas'); // kids / teen / toefl
+            $table->string('kursus'); // kids / teen / toefl
             $table->string('no_hp'); // nomor HP
 
             // Login dan hak akses

@@ -10,6 +10,6 @@ class GradeController extends Controller
     public function index ()
     {
         $grades = Grade::with('student')->get();
-        return view('grades.index', compact('grades'));
+        return view('siswa.dashboard', compact('grades'));
     }
 }

@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('vocabularies', function (Blueprint $table) {
+        Schema::create('conversations', function (Blueprint $table) {
             $table->id();
-            $table->string('verb1');
-            $table->string('verb2')->nullable();
-            $table->string('verb3')->nullable();
-            $table->string('meaning');
-            $table->timestamps();
+            $table->string('title'); // Judul video percakapan
+            $table->string('video'); // Link YouTube
+            $table->timestamps(); // created_at & updated_at
         });
     }
 
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('vocabularies');
+        Schema::dropIfExists('conversations');
     }
 };

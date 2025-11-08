@@ -26,21 +26,38 @@
 			<!-- Menu -->
 			<div class="collapse navbar-collapse" id="navbarSiswa">
 			<ul class="navbar-nav ms-auto align-items-center">
-				<li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-				<li class="nav-item"><a class="nav-link" href="#materi">Materi</a></li>
-				<li class="nav-item"><a class="nav-link" href="#nilai">Nilai Saya</a></li>
-				<li class="nav-item dropdown">
-				<!-- <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">{{ Auth::user()->name }}</a> -->
-				<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">profil</a>
-				<ul class="dropdown-menu dropdown-menu-end">
-					<li>
-					<form method="POST" action="{{ route('logout') }}">
-						@csrf
-						<button type="submit" class="dropdown-item text-danger">Logout</button>
-					</form>
-					</li>
-				</ul>
+				<li class="nav-item">
+					<a class="nav-link {{ request()->routeIs('siswa.dashboard') ? 'active' : '' }}" href="{{ route('siswa.dashboard') }}">Home</a>
 				</li>
+				<li class="nav-item"><a class="nav-link" href="#materi">Materi</a></li>
+				<li class="nav-item"><a class="nav-link" href="#nilai">Nilai</a></li>
+
+				<!-- Dropdown Profil -->
+				<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" data-bs-toggle="dropdown">
+							<img src="https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->name) }}&background=0D8ABC&color=fff&size=32" 
+								 alt="Profile" 
+								 class="rounded-circle" 
+								 width="32" 
+								 height="32">
+							<span>{{ Auth::user()->name }}</span>
+						</a>
+
+						<ul class="dropdown-menu dropdown-menu-end shadow">
+							<li>
+								<a class="dropdown-item" href="{{ route('profile.edit') }}">
+									Profil Saya
+								</a>
+							</li>
+							<li><hr class="dropdown-divider"></li>
+							<li>
+								<form method="POST" action="{{ route('logout') }}">
+									@csrf
+									<button type="submit" class="dropdown-item text-danger">Logout</button>
+								</form>
+							</li>
+						</ul>
+					</li>
 			</ul>
 			</div>
 		</div>

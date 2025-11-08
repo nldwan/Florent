@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Grade;
+use App\Models\Material;
+use App\Models\Vocabulary;
+use App\Models\Conversation;
 
 class SiswaController extends Controller
 {
@@ -18,11 +21,19 @@ class SiswaController extends Controller
 
     public function materi()
     {
-        return view('siswa.materi');
+        $materials = Material::all();
+        return view('siswa.materi', compact('materials'));
     }
 
     public function vocabulary()
     {
-        return view('siswa.vocabulary');
+        $vocabularies = Vocabulary::all();
+        return view('siswa.vocabulary', compact('vocabularies'));
+    }
+
+    public function conversation()
+    {
+        $conversations = Conversation::all();
+        return view('siswa.conversation', compact('conversations'));
     }
 }
