@@ -1,20 +1,90 @@
 @extends('layouts.siswa')
 
 @section('content')
-<div class="container mx-auto p-4">
-    <h2 class="text-2xl font-semibold mb-4">Conversation Videos</h2>
 
-    @foreach($conversations as $conversation)
-        <div class="bg-white p-4 rounded-lg shadow mb-4">
-            <h3 class="text-lg font-medium mb-2">{{ $conversation->title }}</h3>
-            <div class="aspect-w-16 aspect-h-9">
-                <iframe class="w-full h-64"
-                    src="{{ str_replace('watch?v=', 'embed/', $conversation->video) }}"
-                    frameborder="0"
-                    allowfullscreen>
-                </iframe>
+<style>
+    .video-grid {
+        display: grid;
+        gap: 20px;
+        padding: 20px 0;
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .video-card {
+        background: white;
+        border-radius: 12px;
+        padding: 12px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+        transition: 0.2s;
+    }
+
+    .video-card:hover {
+        box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+        transform: translateY(-3px);
+    }
+
+    .video-title {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: #374151;
+    }
+
+    .video-wrapper {
+        position: relative;
+        width: 100%;
+        padding-bottom: 56.25%; /* ratio 16:9 */
+        overflow: hidden;
+        border-radius: 10px;
+    }
+
+    .video-wrapper iframe {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        border: 0;
+    }
+
+    @media (min-width: 640px) {
+        .video-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .video-grid {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+</style>
+
+<div class="container mx-auto px-4">
+
+    <h2 class="text-3xl font-semibold mb-6 text-gray-800 border-b pb-2">
+        Conversation Videos
+    </h2>
+
+    <div class="video-grid">
+        @foreach($conversations as $c)
+            <div class="video-card">
+
+                <div class="video-title">
+                    {{ $c->title }}
+                </div>
+
+                <div class="video-wrapper">
+                    <iframe 
+                        src="{{ $c->video }}"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+
             </div>
-        </div>
-    @endforeach
+        @endforeach
+    </div>
+
 </div>
+
 @endsection

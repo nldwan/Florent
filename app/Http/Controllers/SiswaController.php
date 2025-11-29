@@ -21,15 +21,18 @@ class SiswaController extends Controller
 
     public function materi()
     {
-        $materials = Material::all();
+        $user = Auth::user();
+
+        $materi = Material::where('kursus', $user->kursus)->get();
+
         return view('siswa.materi', compact('materials'));
     }
 
-    public function vocabulary()
-    {
-        $vocabularies = Vocabulary::all();
-        return view('siswa.vocabulary', compact('vocabularies'));
-    }
+    // public function vocabulary() 
+    // {
+    //     $vocabularies = Vocabulary::all();
+    //     return view('siswa.vocabulary', compact('vocabularies'));
+    // }
 
     public function conversation()
     {

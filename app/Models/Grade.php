@@ -13,15 +13,15 @@ class Grade extends Model
 
     protected $fillable = [
         'user_id',
+        'writing_grammar',
+        'writing_translation',
+        'writing_composition',
+        'reading_compre',
+        'reading_vocabulary',
+        'listening_compre',
         'speaking_pronouncing',
         'speaking_intonation',
         'speaking_fluency',
-        'writing_grammar',
-        'writing_reading',
-        'writing_listening',
-        'writing_vocabulary',
-        'writing_translation',
-        'writing_composition',
         'notes',
     ];
 

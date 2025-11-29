@@ -13,21 +13,4 @@ class MaterialController extends Controller
         return view('siswa.materi', compact('materials'));
     }
 
-    // Contoh fungsi upload file
-    public function store(Request $request)
-    {
-        $request->validate([
-            'title' => 'required|string',
-            'file' => 'required|file',
-        ]);
-
-        $filePath = $request->file('file')->store('materials');
-
-        Material::create([
-            'title' => $request->title,
-            'file' => $filePath,
-        ]);
-
-        return redirect()->back()->with('success', 'Material berhasil ditambahkan');
-    }
 }

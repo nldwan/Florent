@@ -132,13 +132,21 @@
                 @enderror
             </div>
 
-            <div class="form-check mb-3">
-                <input 
-                    type="checkbox" 
-                    class="form-check-input" 
-                    id="remember_me" 
-                    name="remember">
-                <label class="form-check-label" for="remember_me">Ingat saya</label>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="form-check m-0">
+                    <input 
+                        type="checkbox" 
+                        class="form-check-input" 
+                        id="remember_me" 
+                        name="remember">
+                    <label class="form-check-label" for="remember_me">Ingat saya</label>
+                </div>
+
+                @if (Route::has('password.request'))
+                    <a href="{{ route('password.request') }}" class="link-register small text-decoration-none">
+                        Lupa password?
+                    </a>
+                @endif
             </div>
 
             <button type="submit" class="btn-login">Login</button>

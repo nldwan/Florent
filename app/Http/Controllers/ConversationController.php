@@ -25,7 +25,7 @@ class ConversationController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'video' => 'required|string|max:255',
+            'video' => 'required|regex:/^https:\/\/www\.youtube\.com\/embed\/.+$/',
         ]);
 
         Conversation::create($request->only(['title', 'video']));

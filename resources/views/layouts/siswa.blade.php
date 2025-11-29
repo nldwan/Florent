@@ -1,4 +1,3 @@
-<!-- resources/views/layouts/siswa.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +6,7 @@
 	<link rel="icon" href="{{ asset('images/favicon.png') }}" type="image/png">
 	<title>{{ config('app.name', 'Florent') }}</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 	<link rel="stylesheet" href="{{ asset('css/layoutsiswa.css') }}">
 </head>
 <body>
@@ -27,19 +27,19 @@
 			<div class="collapse navbar-collapse" id="navbarSiswa">
 			<ul class="navbar-nav ms-auto align-items-center">
 				<li class="nav-item">
-					<a class="nav-link {{ request()->routeIs('siswa.dashboard') ? 'active' : '' }}" href="{{ route('siswa.dashboard') }}">Home</a>
+					<a class="nav-link" href="{{ url('/siswa/dashboard#home') }}">Home</a>
 				</li>
-				<li class="nav-item"><a class="nav-link" href="#materi">Materi</a></li>
-				<li class="nav-item"><a class="nav-link" href="#nilai">Nilai</a></li>
+				<li class="nav-item"><a class="nav-link" href="{{ url('/siswa/dashboard#materi') }}">Materi</a></li>
+				<li class="nav-item"><a class="nav-link" href="{{ url('/siswa/dashboard#nilai') }}">Nilai</a></li>
 
 				<!-- Dropdown Profil -->
 				<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" data-bs-toggle="dropdown">
-							<img src="https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->name) }}&background=0D8ABC&color=fff&size=32" 
+							<!-- <img src="https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->name) }}&background=0D8ABC&color=fff&size=32" 
 								 alt="Profile" 
 								 class="rounded-circle" 
 								 width="32" 
-								 height="32">
+								 height="32"> -->
 							<span>{{ Auth::user()->name }}</span>
 						</a>
 

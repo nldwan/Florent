@@ -15,18 +15,22 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id'); // relasi ke siswa
 
+            // Writing
+            $table->integer('writing_grammar')->nullable();
+            $table->integer('writing_translation')->nullable();
+            $table->integer('writing_composition')->nullable();
+
+            // Reading
+            $table->integer('reading_compre')->nullable();
+            $table->integer('reading_vocabulary')->nullable();
+
+            // Listening
+            $table->integer('listening_compre')->nullable();
+
             // Speaking
             $table->integer('speaking_pronouncing')->nullable();
             $table->integer('speaking_intonation')->nullable();
             $table->integer('speaking_fluency')->nullable();
-
-            // Writing
-            $table->integer('writing_grammar')->nullable();
-            $table->integer('writing_reading')->nullable();
-            $table->integer('writing_listening')->nullable();
-            $table->integer('writing_vocabulary')->nullable();
-            $table->integer('writing_translation')->nullable();
-            $table->integer('writing_composition')->nullable();
 
             // Catatan dari guru
             $table->text('notes')->nullable();

@@ -122,9 +122,9 @@
                     <label for="kursus">Kursus</label>
                     <select id="kursus" name="kursus" class="form-select" required>
                         <option value="">Pilih Kursus</option>
-                        <option value="kid">Kid Program</option>
+                        <option value="kids">Kid Program</option>
                         <option value="teen">Teen & Youth Program</option>
-                        <option value="toefl">TOEFL Preparation</option>
+                        <option value="adult">Adult Program</option>
                     </select>
                 </div>
 

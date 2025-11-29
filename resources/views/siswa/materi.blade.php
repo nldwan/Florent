@@ -8,7 +8,7 @@
         box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
     .icon-wrapper {
-        background-color: #d9c4ff;
+        background-color: #fcd8a7;
         width: 80px;
         height: 80px;
         border-radius: 50%;
@@ -18,7 +18,7 @@
     }
     .icon-wrapper i {
         font-size: 38px;
-        color: #7c3aed;
+        color: #dea75b;
     }
     .btn-lihat {
         background-color: #2563eb;

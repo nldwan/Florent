@@ -32,12 +32,10 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'kursus' => ['required', 'in:kid,teen,toefl'],
+            'kursus' => ['required', 'in:kids,teen,adult'],
             'no_hp' => ['required', 'string', 'max:15'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-
-        // dd($request->all());
 
         $user = User::create([
             'name' => $request->name,
@@ -47,8 +45,6 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
             'role' => 'siswa',
         ]);
-
-        // dd('Berhasil buat user baru!');
 
         event(new Registered($user));
 

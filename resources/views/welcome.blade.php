@@ -139,8 +139,8 @@
         <div class="col-md-4">
           <div class="card border-0 shadow card-hover" style="background-color: rgba(255, 255, 255, 0.8);">
             <div class="card-body text-center p-4">
-              <h4 class="h5 fw-semibold text-amber">TOEFL Preparation</h4>
-              <p class="text-muted mt-2">Program ini membantu mempersiapkan diri untuk menghadapi tes TOEFL dengan strategi dan teknik yang efektif.</p>
+              <h4 class="h5 fw-semibold text-amber">Adult Program</h4>
+              <p class="text-muted mt-2">Program ini membantu bagi mahasiswa atau orang dewasa untuk meningkatkan kemampuan bahasa inggrisnya.</p>
             </div>
           </div>
         </div>

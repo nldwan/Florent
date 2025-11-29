@@ -3,6 +3,16 @@
 @section('content')
 <div class="container mt-4">
     <!-- <h3>Vocabulary Kelas {{ auth()->user()->kelas }}</h3> -->
+    <form action="{{ route('siswa.vocabulary') }}" method="GET" class="mb-4 d-flex">
+        <input 
+            type="text" 
+            name="search" 
+            class="form-control me-2" 
+            placeholder="Cari kata..." 
+            value="{{ request('search') }}"
+        >
+        <button type="submit" class="btn btn-primary">Cari</button>
+    </form>
     <h3>Vocabulary</h3>
     <table class="table table-bordered">
         <thead>
