@@ -119,12 +119,12 @@
                 </div>
 
                 <div class="col-md-6">
-                    <label for="kursus">Kursus</label>
-                    <select id="kursus" name="kursus" class="form-select" required>
-                        <option value="">Pilih Kursus</option>
-                        <option value="kids">Kid Program</option>
-                        <option value="teen">Teen & Youth Program</option>
-                        <option value="adult">Adult Program</option>
+                    <label for="course_id">Kursus</label>
+                    <select id="course_id" name="course_id" class="form-select" required>
+                        <option value="" disabled selected>Pilih Kursus</option>
+                        @foreach($courses as $course)
+                            <option value="{{ $course->id }}">{{ $course->name }}</option>
+                        @endforeach
                     </select>
                 </div>
 

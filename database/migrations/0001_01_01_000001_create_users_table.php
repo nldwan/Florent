@@ -17,8 +17,8 @@ return new class extends Migration
 
             // Data pendaftaran siswa
             $table->string('name');
+            $table->foreignId('course_id')->nullable()->constrained()->onDelete('set null');
             $table->string('email')->unique();
-            $table->string('kursus')->nullable();
             $table->string('no_hp');
 
             // Login dan hak akses

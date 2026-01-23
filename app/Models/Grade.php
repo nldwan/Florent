@@ -13,6 +13,9 @@ class Grade extends Model
 
     protected $fillable = [
         'user_id',
+        'course_id',
+        'level_id',
+        'sublevel_id',
         'writing_grammar',
         'writing_translation',
         'writing_composition',
@@ -22,11 +25,25 @@ class Grade extends Model
         'speaking_pronouncing',
         'speaking_intonation',
         'speaking_fluency',
+        'final_score',
+        'status',
         'notes',
     ];
 
-    public function student()
+    public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class);
+    }
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
+    public function level()
+    {
+        return $this->belongsTo(Level::class);
+    }
+    public function sublevel()
+    {
+        return $this->belongsTo(Sublevel::class);
     }
 }

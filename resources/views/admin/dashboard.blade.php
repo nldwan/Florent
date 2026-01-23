@@ -1,20 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Dashboard Admin</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100">
-    <div class="max-w-4xl mx-auto mt-10 bg-white p-6 rounded-lg shadow">
-        <h1 class="text-2xl font-bold text-gray-800 mb-4">Dashboard Admin</h1>
-        <p class="text-gray-600">Selamat datang, Admin!</p>
-        
-        <div class="mt-6 space-x-4">
-            <a href="#" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Kelola Siswa</a>
-            <a href="#" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">Kelola Materi</a>
-            <a href="#" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Kelola Nilai</a>
+@extends('layouts.admin')
+
+@section('content')
+<style>
+    /* Dashboard card sederhana */
+    .dashboard-card {
+        border-radius: 10px;
+        border: 1px solid #e5e7eb;
+        background-color: #fff;
+        transition: 0.2s ease;
+    }
+
+    .dashboard-card:hover {
+        box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+        transform: translateY(-2px);
+    }
+
+    .dashboard-title {
+        font-size: 14px;
+        color: #6b7280;
+    }
+
+    .dashboard-number {
+        font-size: 26px;
+        font-weight: 600;
+        color: #111827;
+    }
+</style>
+
+<h2 class="mb-3 fw-semibold">Dashboard</h2>
+
+<div class="row g-3">
+
+    <div class="col-md-6 col-xl-3">
+        <div class="card dashboard-card p-3">
+            <div class="dashboard-title">Users</div>
+            <div class="dashboard-number">{{ $userCount ?? 0 }}</div>
         </div>
     </div>
-</body>
-</html>
+
+    <div class="col-md-6 col-xl-3">
+        <div class="card dashboard-card p-3">
+            <div class="dashboard-title">Materials</div>
+            <div class="dashboard-number">{{ $materialCount ?? 0 }}</div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+        <div class="card dashboard-card p-3">
+            <div class="dashboard-title">Active Admins</div>
+            <div class="dashboard-number">{{ $adminCount ?? 0 }}</div>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-xl-3">
+        <div class="card dashboard-card p-3">
+            <div class="dashboard-title">Other Info</div>
+            <div class="dashboard-number">—</div>
+        </div>
+    </div>
+
+</div>
+@endsection

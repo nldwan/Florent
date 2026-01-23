@@ -12,8 +12,7 @@ class Vocabulary extends Model
     protected $table = 'vocabularies';
 
     protected $fillable = [
-        'word',
-        'type',
+        'verb1',
         'verb2',
         'verb3',
         'meaning',

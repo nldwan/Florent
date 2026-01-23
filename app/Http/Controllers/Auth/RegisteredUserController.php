@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Illuminate\Validation\Rule;
+use App\Models\Course;
 
 class RegisteredUserController extends Controller
 {
@@ -19,7 +21,8 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        $courses = Course::all();
+        return view('auth.register', compact('courses'));
     }
 
     /**
@@ -32,7 +35,7 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'kursus' => ['required', 'in:kids,teen,adult'],
+            'course_id' => ['required', Rule::exists('courses', 'id')],
             'no_hp' => ['required', 'string', 'max:15'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
@@ -40,7 +43,7 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'kursus' => $request->kursus,
+            'course_id' => $request->course_id,
             'no_hp' => $request->no_hp,
             'password' => Hash::make($request->password),
             'role' => 'siswa',

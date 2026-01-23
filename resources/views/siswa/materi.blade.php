@@ -47,32 +47,67 @@
 
     <div class="row justify-content-center">
         @foreach ($materials as $material)
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 d-flex justify-content-center">
-            <div class="card materi-card text-center border-0">
-                <div class="card-body">
-                    <!-- Ikon -->
-                    <div class="icon-wrapper mx-auto mb-3">
-                        <i class="bi bi-file-earmark-text"></i>
+
+            @php
+                $unlocked = false;
+
+                $user = auth()->user();
+
+                if ($material->course_id == $user->course_id) {
+
+                    $materialLevelOrder = $material->level->order;
+                    $materialSubOrder   = $material->sublevel->order;
+
+                    $currentLevelOrder  = $user->currentLevel->order;
+                    $currentSubOrder    = $user->currentSublevel->order;
+
+                    if ($materialLevelOrder < $currentLevelOrder) {
+                        $unlocked = true;
+                    }
+                    elseif (
+                        $materialLevelOrder == $currentLevelOrder &&
+                        $materialSubOrder <= $currentSubOrder
+                    ) {
+                        $unlocked = true;
+                    }
+                }
+            @endphp
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 d-flex justify-content-center">
+                <div class="card materi-card text-center border-0 {{ $unlocked ? '' : 'opacity-50' }}">
+                    <div class="card-body">
+
+                        <!-- Ikon -->
+                        <div class="icon-wrapper mx-auto mb-3">
+                            <i class="bi {{ $unlocked ? 'bi-file-earmark-text' : 'bi-lock-fill' }}"></i>
+                        </div>
+
+                        <!-- Judul -->
+                        <h5 class="fw-semibold mb-3">
+                            {{ $material->title }}
+                        </h5>
+
+                        <!-- Tombol -->
+                        <div class="d-flex justify-content-center gap-2">
+                            @if ($unlocked && $material->file)
+                                <a href="{{ asset('materi/' . $material->file) }}"
+                                target="_blank"
+                                class="btn btn-lihat">Lihat</a>
+
+                                <a href="{{ asset('materi/' . $material->file) }}"
+                                download
+                                class="btn btn-download">Download</a>
+                            @else
+                                <button class="btn btn-secondary" disabled>
+                                    🔒 Terkunci
+                                </button>
+                            @endif
+                        </div>
+
                     </div>
-
-                    <!-- Judul -->
-                    <h5 class="fw-semibold mb-3" style="color:#1f2937;">{{ $material->title }}</h5>
-
-                    <!-- Tombol -->
-                    @if($material->file)
-                    <div class="d-flex justify-content-center gap-2">
-                        <a href="{{ asset('materi/' . $material->file) }}" 
-                           target="_blank" 
-                           class="btn btn-lihat">Lihat</a>
-
-                        <a href="{{ asset('materi/' . $material->file) }}" 
-                           download 
-                           class="btn btn-download">Download</a>
-                    </div>
-                    @endif
                 </div>
             </div>
-        </div>
+
         @endforeach
     </div>
 </div>

@@ -151,12 +151,12 @@
 
             <button type="submit" class="btn-login">Login</button>
 
-            <div class="text-center mt-3">
+            {{-- <div class="text-center mt-3">
                 <p class="mb-0">
                     Belum punya akun? 
                     <a href="{{ route('register') }}" class="link-register">Daftar sekarang</a>
                 </p>
-            </div>
+            </div> --}}
         </form>
     </div>
 

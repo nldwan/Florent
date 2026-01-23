@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Level;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,12 +13,13 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
+            CourseSeeder::class,
+            LevelSeeder::class,
+            SublevelSeeder::class,
             UserSeeder::class,
             MaterialSeeder::class,
             VocabularySeeder::class,
-            GradeSeeder::class,
             ConversationSeeder::class,
-            GradeSeeder::class,
         ]);
     }
 }

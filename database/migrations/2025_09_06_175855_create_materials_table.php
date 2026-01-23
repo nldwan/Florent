@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('materials', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('course_id')->constrained()->onDelete('restrict');  
+            $table->foreignId('level_id')->constrained()->onDelete('restrict');   
+            $table->foreignId('sublevel_id')->constrained()->onDelete('restrict');
             $table->string('title');
-            $table->string('file');
+            $table->string('file'); // nama file PDF di folder /public/materi
             $table->timestamps();
         });
     }

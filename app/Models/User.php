@@ -20,10 +20,12 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'kursus',
+        'course_id',
         'no_hp',
         'password',
         'role',
+        'current_level_id',
+        'current_sublevel_id',
     ];
 
     /**
@@ -45,5 +47,18 @@ class User extends Authenticatable
         return [
             'password' => 'hashed',
         ];
+    }
+
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
+    public function currentLevel()
+    {
+        return $this->belongsTo(Level::class, 'current_level_id');
+    }
+    public function currentSublevel()
+    {
+        return $this->belongsTo(Sublevel::class, 'current_sublevel_id');
     }
 }

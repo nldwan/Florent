@@ -273,7 +273,11 @@
 			<div class="grade-grid">
 				@foreach ($grades as $index => $grade)
 					<div class="grade-card">
-						<div class="grade-title">Penilaian #{{ $index + 1 }}</div>
+						<div class="grade-title">
+							{{ $grade->course->name ?? '' }}
+							{{ $grade->level->name ?? '' }}
+							{{ $grade->sublevel->order ?? '' }}
+						</div>
 
 						<div class="section-label">Writing</div>
 						<div class="grade-list">

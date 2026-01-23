@@ -9,7 +9,14 @@ class Conversation extends Model
 {
     use HasFactory;
 
-    protected $table = 'conversations';
+    protected $fillable = [
+        'course_id',
+        'title',
+        'video',
+    ];
 
-    protected $fillable = ['title', 'video'];
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
 }

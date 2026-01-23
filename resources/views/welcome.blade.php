@@ -28,9 +28,6 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto align-items-center">
           <li class="nav-item ms-2">
-            <a href="{{ route('register') }}" class="btn btn-outline-cyan px-3 py-2">Register</a>
-          </li>
-          <li class="nav-item ms-2">
             <a href="{{ route('login') }}" class="btn btn-cyan px-3 py-2">Login</a>
           </li>
         </ul>
