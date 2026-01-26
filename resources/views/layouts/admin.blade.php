@@ -227,6 +227,10 @@ body {
                     <span>Grades</span>
                 </a>
             </div>
+            <!-- PAYMENTS -->
+            <a href="{{ route('admin.payments.index') }}" class="{{ request()->routeIs('admin.payments.*') ? 'active' : '' }}">
+                <i class="bi bi-receipt-cutoff"></i><span>Payments</span>
+            </a>
         </nav>
     </div>
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\VocabularyController;
@@ -11,7 +12,9 @@ use App\Http\Controllers\Admin\AdminMaterialController;
 use App\Http\Controllers\Admin\AdminVocabularyController;
 use App\Http\Controllers\Admin\AdminConversationController;
 use App\Http\Controllers\Admin\AdminGradeController;
+use App\Http\Controllers\Admin\AdminPaymentController;
 use App\Http\Controllers\ConversationController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -23,6 +26,16 @@ use Illuminate\Http\Request;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// =====================
+// ADMIN AUTH (LOGIN)
+// =====================
+Route::get('/admin/login', function () {
+    return view('admin.auth.login');
+})->name('admin.login');
+
+Route::post('/admin/login', [AdminAuthController::class, 'login'])
+    ->name('admin.login.process');
 
 // ===============================
 // EMAIL VERIFICATION
@@ -41,6 +54,16 @@ Route::post('/email/verification-notification', function (Request $request) {
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
+// ===============================
+// PAYMENT RESULT PAGES
+// ===============================
+Route::get('/payment/success', function () {
+    return view('payment.success');
+});
+
+Route::get('/payment/failed', function () {
+    return view('payment.failed');
+});
 
 // ======================================================
 // ROUTE PROTECTED (HARUS LOGIN)
@@ -57,6 +80,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/vocabulary/type/{type}', [VocabularyController::class, 'filterByType'])->name('vocabulary.filter');
         Route::get('/siswa/conversation', [ConversationController::class, 'index'])->name('siswa.conversation');
         Route::get('/siswa/grade', [SiswaController::class, 'grade'])->name('siswa.grade');
+        Route::post('/siswa/payment/create', [PaymentController::class, 'create'])->name('siswa.payment.create');
     });
 
     // =====================
@@ -118,6 +142,9 @@ Route::prefix('admin')->middleware(['auth','role:admin'])->group(function() {
     Route::post('/grades', [AdminGradeController::class, 'store'])->name('admin.grades.store');
     Route::put('/grades/{grade}', [AdminGradeController::class, 'update'])->name('admin.grades.update');
     Route::delete('/grades/{grade}', [AdminGradeController::class, 'destroy'])->name('admin.grades.destroy');
+
+    // Payments
+    Route::get('/admin/payments', [AdminPaymentController::class, 'index'])->name('admin.payments.index');
 
     Route::post('/logout', function() {
         Auth::logout();

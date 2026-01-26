@@ -194,7 +194,7 @@
 		color: #94a3b8;
 		font-size: 1rem;
 		margin-top: 30px;
-	}
+	} 
 
 	/* TABLET */
 	@media (min-width: 640px) {
@@ -234,7 +234,9 @@
 	<div class="home-content">
 		<h1>Halo, {{ Auth::user()->name }}</h1>
 		<p>Selamat datang di <strong>Florent English Course!</strong><br>Yuk, lanjutkan perjalanan belajarmu</p>
-		<a href="#materi" class="btn-cyan">Mulai Belajar</a>
+		<button id="pay-button" class="btn btn-cyan">
+			Bayar Sekarang
+		</button>
 	</div>
 </section>
 
@@ -342,4 +344,33 @@
 		@endif
 	</div>
 </section>
+
+<script src="https://app.sandbox.midtrans.com/snap/snap.js"
+        data-client-key="{{ env('MIDTRANS_CLIENT_KEY') }}"></script>
+
+<script>
+document.getElementById('pay-button')?.addEventListener('click', function () {
+    fetch("{{ route('siswa.payment.create') }}", {
+        method: "POST",
+        headers: {
+            "X-CSRF-TOKEN": "{{ csrf_token() }}"
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        snap.pay(data.snap_token, {
+            onSuccess: function(result) {
+                window.location.href = "{{ route('siswa.dashboard') }}?payment=success";
+            },
+            onPending: function(result) {
+                alert("Menunggu pembayaran...");
+            },
+            onError: function(result) {
+                alert("Pembayaran gagal");
+            }
+        });
+    });
+});
+</script>
+
 @endsection

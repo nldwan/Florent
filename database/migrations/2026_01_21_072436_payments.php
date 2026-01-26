@@ -36,12 +36,6 @@ return new class extends Migration
                 'expired'
             ])->default('pending');
 
-            // metode pembayaran (gopay, bank, dll)
-            $table->string('payment_method')->nullable();
-
-            // waktu berhasil bayar
-            $table->timestamp('paid_at')->nullable();
-
             $table->timestamps();
         });
     }

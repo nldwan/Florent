@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login | Florent</title>
+    <title>Login Admin | Florent</title>
     <link rel="icon" href="{{ asset('images/favicon.png') }}" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
@@ -86,7 +86,11 @@
             <img src="{{ asset('images/favicon.png') }}" alt="Logo Florent">
         </div>
 
-        <form method="POST" action="{{ route('login') }}">
+        <h4 class="text-center mb-4 fw-semibold">
+            Login Admin
+        </h4>
+
+        <form method="POST" action="{{ route('admin.login') }}">
             @csrf
 
             <div class="mb-3">
@@ -119,23 +123,6 @@
                 @error('password')
                     <div class="text-danger small mt-1">{{ $message }}</div>
                 @enderror
-            </div>
-
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <div class="form-check m-0">
-                    <input 
-                        type="checkbox" 
-                        class="form-check-input" 
-                        id="remember_me" 
-                        name="remember">
-                    <label class="form-check-label" for="remember_me">Ingat saya</label>
-                </div>
-
-                @if (Route::has('password.request'))
-                    <a href="{{ route('password.request') }}" class="link-register small text-decoration-none">
-                        Lupa password?
-                    </a>
-                @endif
             </div>
 
             <button type="submit" class="btn-login">Login</button>
