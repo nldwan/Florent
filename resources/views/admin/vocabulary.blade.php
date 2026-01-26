@@ -102,7 +102,7 @@
                     <td>{{ $item->verb2 }}</td>
                     <td>{{ $item->verb3 }}</td>
                     <td>{{ $item->meaning }}</td>
-                    <td class="action-btns">
+                    <td class="d-flex gap-1 flex-wrap">
                         <button class="btn btn-warning btn-sm"
                             data-bs-toggle="modal"
                             data-bs-target="#editModal{{ $item->id }}">

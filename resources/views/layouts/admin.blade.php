@@ -14,6 +14,7 @@
 body {
     font-family: 'Poppins', sans-serif;
     background-color: #f8f9fa;
+    overflow-x: hidden; /* cegah scroll horizontal */
 }
 
 /* Sidebar desktop */
@@ -23,6 +24,7 @@ body {
     background-color: #343a40;
     color: #ddd;
     transition: all 0.3s;
+    flex-shrink: 0; /* jangan menyusut */
 }
 .sidebar-desktop a {
     color: #ddd;
@@ -52,7 +54,6 @@ body {
     margin: 0;
     font-size: 1.3rem;
     font-weight: 600;
-    font-family: 'Poppins', sans-serif;
 }
 
 /* Topbar */
@@ -94,18 +95,10 @@ body {
     z-index: 1000;
     animation: fadeSlide 0.2s ease;
 }
-
 @keyframes fadeSlide {
-    from {
-        opacity: 0;
-        transform: translateY(-5px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
 }
-
 .profile-popup .avatar {
     width: 56px;
     height: 56px;
@@ -119,16 +112,23 @@ body {
     justify-content: center;
     margin: 0 auto 10px;
 }
-
 .profile-popup .name {
     text-align: center;
     font-weight: 600;
     margin-bottom: 15px;
 }
 
-/* Content */
+/* Content area */
 .content {
     padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Flex layout */
+.d-flex {
+    display: flex;
+    flex-wrap: nowrap;
 }
 
 /* Mobile adjustments */
@@ -136,6 +136,25 @@ body {
     .sidebar-desktop {
         display: none;
     }
+    .sidebar-desktop.collapse a {
+        padding-left: 20px;
+    }
+    .topbar {
+        justify-content: space-between;
+    }
+    .content {
+        padding: 15px 10px;
+    }
+}
+
+/* Sidebar collapse link padding */
+.sidebar-desktop .collapse a {
+    padding-left: 20px;
+}
+
+/* Prevent sidebar from shrinking in large screens */
+.flex-grow-1 {
+    flex-grow: 1;
 }
 </style>
 </head>
@@ -167,17 +186,11 @@ body {
 
             <div class="collapse ps-4 {{ request()->routeIs('admin.users.*') ? 'show' : '' }}"
                 id="userManagement">
-
-                <a href="{{ route('admin.users.admin') }}"
-                class="{{ request()->routeIs('admin.users.admin') ? 'active' : '' }}">
-                    <i class="bi bi-shield-lock"></i>
-                    <span>Admin Accounts</span>
+                <a href="{{ route('admin.users.admin') }}" class="{{ request()->routeIs('admin.users.admin') ? 'active' : '' }}">
+                    <i class="bi bi-shield-lock"></i><span>Admin Accounts</span>
                 </a>
-
-                <a href="{{ route('admin.users.siswa') }}"
-                class="{{ request()->routeIs('admin.users.siswa') ? 'active' : '' }}">
-                    <i class="bi bi-mortarboard"></i>
-                    <span>Student Accounts</span>
+                <a href="{{ route('admin.users.siswa') }}" class="{{ request()->routeIs('admin.users.siswa') ? 'active' : '' }}">
+                    <i class="bi bi-mortarboard"></i><span>Student Accounts</span>
                 </a>
             </div>
 
@@ -200,34 +213,21 @@ body {
                 <i class="bi bi-chevron-down small"></i>
             </a>
 
-            <div class="collapse ps-4
-                {{ $learningActive ? 'show' : '' }}"id="learningManagement">
-
-                <a href="{{ route('admin.materials.index') }}"
-                class="{{ request()->routeIs('admin.materials.*') ? 'show' : '' }}">
-                    <i class="bi bi-file-earmark-text"></i>
-                    <span>Materials</span>
+            <div class="collapse ps-4 {{ $learningActive ? 'show' : '' }}" id="learningManagement">
+                <a href="{{ route('admin.materials.index') }}" class="{{ request()->routeIs('admin.materials.*') ? 'active' : '' }}">
+                    <i class="bi bi-file-earmark-text"></i><span>Materials</span>
                 </a>
-
-                <a href="{{ route('admin.vocabulary.index') }}"
-                class="{{ request()->routeIs('admin.vocabulary.*') ? 'active' : '' }}">
-                    <i class="bi bi-spellcheck"></i>
-                    <span>Vocabulary</span>
+                <a href="{{ route('admin.vocabulary.index') }}" class="{{ request()->routeIs('admin.vocabulary.*') ? 'active' : '' }}">
+                    <i class="bi bi-spellcheck"></i><span>Vocabulary</span>
                 </a>
-
-                <a href="{{ route('admin.conversations.index') }}"
-                class="{{ request()->routeIs('admin.conversations.*') ? 'active' : '' }}">
-                    <i class="bi bi-chat-dots"></i>
-                    <span>Conversations</span>
+                <a href="{{ route('admin.conversations.index') }}" class="{{ request()->routeIs('admin.conversations.*') ? 'active' : '' }}">
+                    <i class="bi bi-chat-dots"></i><span>Conversations</span>
                 </a>
-
-                <a href="{{ route('admin.grades.index') }}"
-                class="{{ request()->routeIs('admin.grades.*') ? 'active' : '' }}">
-                    <i class="bi bi-award-fill"></i>
-                    <span>Grades</span>
+                <a href="{{ route('admin.grades.index') }}" class="{{ request()->routeIs('admin.grades.*') ? 'active' : '' }}">
+                    <i class="bi bi-award-fill"></i><span>Grades</span>
                 </a>
             </div>
-            <!-- PAYMENTS -->
+
             <a href="{{ route('admin.payments.index') }}" class="{{ request()->routeIs('admin.payments.*') ? 'active' : '' }}">
                 <i class="bi bi-receipt-cutoff"></i><span>Payments</span>
             </a>
@@ -279,49 +279,71 @@ body {
 
 <!-- Sidebar mobile Offcanvas -->
 <div class="offcanvas offcanvas-start d-md-none" tabindex="-1" id="offcanvasSidebar">
-    <div class="offcanvas-header">
+    <div class="offcanvas-header bg-dark text-light">
         <h5 class="offcanvas-title">Florent</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
     </div>
-    <div class="offcanvas-body">
+    <div class="offcanvas-body bg-dark p-0">
         <nav class="nav flex-column">
-            <a href="{{ route('admin.dashboard') }}" class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
-                <i class="bi bi-speedometer2"></i> Dashboard
-            </a>
-            <a href="{{ route('admin.users.admin') }}" class="nav-link {{ request()->routeIs('admin.users.admin') ? 'active' : '' }}">
-                <i class="bi bi-people"></i> Users Admin
-            </a>
-            <a href="{{ route('admin.users.siswa') }}" class="nav-link {{ request()->routeIs('admin.users.siswa') ? 'active' : '' }}">
-                <i class="bi bi-people"></i> Users Siswa
+            <a href="{{ route('admin.dashboard') }}" class="nav-link text-light {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+                <i class="bi bi-speedometer2 me-2"></i> Dashboard
             </a>
 
-            <!-- Link Logout -->
-            <a href="#" class="text-danger mt-3 d-flex align-items-center" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                <i class="bi bi-box-arrow-right me-2"></i>
-                <span>Logout</span>
+            <!-- User Management -->
+            <a class="nav-link text-light d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#mobileUserManagement">
+                <span><i class="bi bi-people-fill me-2"></i> User Management</span>
+                <i class="bi bi-chevron-down small"></i>
             </a>
+            <div class="collapse ps-3" id="mobileUserManagement">
+                <a href="{{ route('admin.users.admin') }}" class="nav-link text-light {{ request()->routeIs('admin.users.admin') ? 'active' : '' }}">
+                    <i class="bi bi-shield-lock me-2"></i> Admin Accounts
+                </a>
+                <a href="{{ route('admin.users.siswa') }}" class="nav-link text-light {{ request()->routeIs('admin.users.siswa') ? 'active' : '' }}">
+                    <i class="bi bi-mortarboard me-2"></i> Student Accounts
+                </a>
+            </div>
 
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
+            <!-- Learning Management -->
+            <a class="nav-link text-light d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#mobileLearningManagement">
+                <span><i class="bi bi-journal-bookmark-fill me-2"></i> Learning Management</span>
+                <i class="bi bi-chevron-down small"></i>
+            </a>
+            <div class="collapse ps-3" id="mobileLearningManagement">
+                <a href="{{ route('admin.materials.index') }}" class="nav-link text-light {{ request()->routeIs('admin.materials.*') ? 'active' : '' }}">
+                    <i class="bi bi-file-earmark-text me-2"></i> Materials
+                </a>
+                <a href="{{ route('admin.vocabulary.index') }}" class="nav-link text-light {{ request()->routeIs('admin.vocabulary.*') ? 'active' : '' }}">
+                    <i class="bi bi-spellcheck me-2"></i> Vocabulary
+                </a>
+                <a href="{{ route('admin.conversations.index') }}" class="nav-link text-light {{ request()->routeIs('admin.conversations.*') ? 'active' : '' }}">
+                    <i class="bi bi-chat-dots me-2"></i> Conversations
+                </a>
+                <a href="{{ route('admin.grades.index') }}" class="nav-link text-light {{ request()->routeIs('admin.grades.*') ? 'active' : '' }}">
+                    <i class="bi bi-award-fill me-2"></i> Grades
+                </a>
+            </div>
+
+            <a href="{{ route('admin.payments.index') }}" class="nav-link text-light {{ request()->routeIs('admin.payments.*') ? 'active' : '' }}">
+                <i class="bi bi-receipt-cutoff me-2"></i> Payments
+            </a>
         </nav>
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    const profileBtn = document.getElementById('profileBtn');
-    const profilePopup = document.getElementById('profilePopup');
+const profileBtn = document.getElementById('profileBtn');
+const profilePopup = document.getElementById('profilePopup');
 
-    profileBtn.addEventListener('click', () => {
-        profilePopup.style.display = profilePopup.style.display === 'block' ? 'none' : 'block';
-    });
+profileBtn.addEventListener('click', () => {
+    profilePopup.style.display = profilePopup.style.display === 'block' ? 'none' : 'block';
+});
 
-    document.addEventListener('click', function(event) {
-        if (!profileBtn.contains(event.target) && !profilePopup.contains(event.target)) {
-            profilePopup.style.display = 'none';
-        }
-    });
+document.addEventListener('click', function(event) {
+    if (!profileBtn.contains(event.target) && !profilePopup.contains(event.target)) {
+        profilePopup.style.display = 'none';
+    }
+});
 </script>
 
 @yield('modals')

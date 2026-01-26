@@ -61,7 +61,7 @@
                        required>
             </div>
 
-            <div>
+            <div class="mb-3">
                 <label>Phone Number</label>
                 <input type="text" name="no_hp"
                        class="form-control"
@@ -69,7 +69,7 @@
                        required>
             </div>
 
-            <div class="mb-4">
+            <div class="mb-3">
                 <label>Password</label>
                 <input type="password" name="password"
                        class="form-control"

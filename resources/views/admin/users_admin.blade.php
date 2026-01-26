@@ -4,75 +4,92 @@
 @section('content')
 
 <style>
-    .page-title {
-        font-weight: 600;
-        letter-spacing: .3px;
-    }
+.page-title {
+    font-weight: 600;
+    letter-spacing: .3px;
+}
 
-    .card {
-        border-radius: 14px;
-    }
+.card {
+    border-radius: 14px;
+}
 
-    table th {
-        font-size: 0.85rem;
-        text-transform: uppercase;
-        letter-spacing: .05em;
-        color: #6c757d;
-    }
+table th {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: #6c757d;
+}
 
-    table td {
-        vertical-align: middle;
-        font-size: 0.95rem;
-    }
+table td {
+    vertical-align: middle;
+    font-size: 0.95rem;
+}
 
-    .custom-modal .modal-header,
-    .custom-modal .modal-footer {
-        border-color: #f0f0f0;
-    }
+.custom-modal .modal-header,
+.custom-modal .modal-footer {
+    border-color: #f0f0f0;
+}
 
-    .btn {
-        border-radius: 8px;
-    }
+.btn {
+    border-radius: 8px;
+}
 
-    .form-group {
-        margin-bottom: 16px;
-    }
+.form-group {
+    margin-bottom: 16px;
+}
 
-    .custom-modal {
-        border-radius: 14px;
-    }
+.custom-modal {
+    border-radius: 14px;
+}
 
-    .custom-modal .modal-body {
-        padding: 24px;
-    }
+.custom-modal .modal-body {
+    padding: 24px;
+}
 
-    .custom-modal .form-control {
-        border-radius: 8px;
-        font-size: 0.9rem;
-    }
+.custom-modal .form-control {
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
 
-    .custom-modal label {
-        font-size: 0.85rem;
-        font-weight: 500;
-        color: #6b7280;
-    }
+.custom-modal label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #6b7280;
+}
 
-    .modal-dialog {
-        margin: auto;
-    }
+.modal-dialog {
+    margin: auto;
+}
 
+.modal-lg {
+    --bs-modal-width: 600px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
     .modal-lg {
-        --bs-modal-width: 600px;
+        --bs-modal-width: 95%;
     }
+
+    .table-responsive {
+        font-size: 0.85rem;
+    }
+
+    .page-title {
+        font-size: 1.1rem;
+    }
+}
 </style>
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h4 class="page-title">Admin Accounts</h4>
-    <a href="{{ route('admin.users.create') }}" class="btn btn-primary btn-sm">
+<!-- Header -->
+<div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
+    <h4 class="page-title mb-0">Admin Accounts</h4>
+    <a href="{{ route('admin.users.create') }}" class="btn btn-primary btn-sm ms-auto">
         <i class="bi bi-plus-lg"></i> Add Admin
     </a>
 </div>
 
+<!-- Table -->
 <div class="card border-0 shadow-sm">
     <div class="table-responsive">
         <table class="table table-hover align-middle mb-0">
@@ -92,7 +109,7 @@
                     <td>{{ $admin->name }}</td>
                     <td>{{ $admin->email }}</td>
                     <td>{{ $admin->no_hp }}</td>
-                    <td>
+                    <td class="d-flex gap-1 flex-wrap">
                         <button class="btn btn-warning btn-sm"
                             data-bs-toggle="modal"
                             data-bs-target="#editAdmin{{ $admin->id }}">
@@ -171,6 +188,7 @@
     </div>
 </div>
 
+<!-- JS -->
 <script>
 function confirmDelete(id) {
     Swal.fire({
@@ -193,9 +211,7 @@ function deleteAdmin(id) {
     fetch(`/admin/users/admin/${id}`, {
         method: 'DELETE',
         headers: {
-            'X-CSRF-TOKEN': document
-                .querySelector('meta[name="csrf-token"]')
-                .getAttribute('content'),
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             'Accept': 'application/json'
         }
     })
@@ -209,13 +225,7 @@ function deleteAdmin(id) {
                 timer: 1500,
                 showConfirmButton: false
             });
-
-            // HAPUS ROW DARI TABLE
-            document
-                .querySelector(`button[onclick="confirmDelete(${id})"]`)
-                .closest('tr')
-                .remove();
-
+            document.querySelector(`button[onclick="confirmDelete(${id})"]`).closest('tr').remove();
         } else {
             Swal.fire('Error', data.message, 'error');
         }
@@ -224,22 +234,17 @@ function deleteAdmin(id) {
         Swal.fire('Error', 'Terjadi kesalahan server', 'error');
     });
 }
-</script>
 
-<script>
 document.querySelectorAll('.edit-form').forEach(form => {
     form.addEventListener('submit', function(e) {
         e.preventDefault();
-
         const id = this.dataset.id;
         const formData = new FormData(this);
 
         fetch(`/admin/users/admin/${id}`, {
             method: 'POST',
             headers: {
-                'X-CSRF-TOKEN': document
-                    .querySelector('meta[name="csrf-token"]')
-                    .getAttribute('content'),
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                 'Accept': 'application/json'
             },
             body: formData
@@ -247,18 +252,10 @@ document.querySelectorAll('.edit-form').forEach(form => {
         .then(res => res.json())
         .then(data => {
             if (data.status === 'success') {
-
-                // Update tabel
                 document.querySelector(`#row-${id} td:nth-child(2)`).innerText = data.data.name;
                 document.querySelector(`#row-${id} td:nth-child(3)`).innerText = data.data.email;
                 document.querySelector(`#row-${id} td:nth-child(4)`).innerText = data.data.no_hp;
-
-                // Tutup modal
-                bootstrap.Modal.getInstance(
-                    this.closest('.modal')
-                ).hide();
-
-                // SweetAlert sukses
+                bootstrap.Modal.getInstance(this.closest('.modal')).hide();
                 Swal.fire({
                     icon: 'success',
                     title: 'Updated!',

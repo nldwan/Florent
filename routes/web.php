@@ -104,8 +104,8 @@ Route::prefix('admin')->middleware(['auth','role:admin'])->group(function() {
     Route::get('/users/siswa', [AdminUserController::class, 'index'])->name('admin.users.siswa');
     Route::get('/users/siswa/create', [AdminUserController::class, 'create'])->name('admin.users.siswa.create');
     Route::post('/users/siswa', [AdminUserController::class, 'store'])->name('admin.users.siswa.store');
-    Route::put('/users/siswa/{id}', [AdminUserController::class, 'update'])->name('admin.users.siswa.update');
-    Route::delete('/users/siswa/{id}', [AdminUserController::class, 'destroy'])->name('admin.users.siswa.destroy');
+    Route::put('/users/siswa/{user}', [AdminUserController::class, 'update'])->name('admin.users.siswa.update');
+    Route::delete('/users/siswa/{user}', [AdminUserController::class, 'destroy'])->name('admin.users.siswa.destroy');
 
 
     // Users Admin/Guru (CRUD lengkap)

@@ -12,4 +12,8 @@ class Course extends Model
     {
         return $this->hasMany(Level::class);
     }
+    public function users()
+    {
+        return $this->hasMany(User::class, 'course_id');
+    }
 }

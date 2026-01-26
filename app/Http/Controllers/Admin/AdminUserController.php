@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Course;
+use App\Models\Level;
+use App\Models\Sublevel;
 use Illuminate\Http\Request;
 
 class AdminUserController extends Controller
@@ -16,7 +19,8 @@ class AdminUserController extends Controller
 
     public function create()
     {
-        return view('admin.users_create');
+        $courses = Course::all();
+        return view('admin.users_create', compact('courses'));
     }
 
     // Simpan admin baru
@@ -27,7 +31,18 @@ class AdminUserController extends Controller
             'email'    => 'required|email|unique:users,email',
             'no_hp'    => 'required|string|max:20',
             'password' => 'required|string|min:6',
+            'course_id' => 'required|exists:courses,id',
         ]);
+
+        // Ambil level pertama dari course yang dipilih
+        $firstLevel = Level::orderBy('order', 'asc')->first();
+
+        // Ambil sublevel pertama dari level pertama
+        $firstSublevel = $firstLevel 
+                        ? Sublevel::where('level_id', $firstLevel->id)
+                                ->orderBy('order', 'asc')
+                                ->first()
+                        : null;
 
         User::create([
             'name'     => $request->name,
@@ -35,6 +50,9 @@ class AdminUserController extends Controller
             'no_hp'    => $request->no_hp,
             'role'     => 'siswa',
             'password' => bcrypt($request->password),
+            'course_id' => $request->course_id,
+            'current_level_id' => $firstLevel ? $firstLevel->id : null,
+            'current_sublevel_id' => $firstSublevel ? $firstSublevel->id : null,
         ]);
 
         return redirect()
@@ -46,7 +64,7 @@ class AdminUserController extends Controller
     {
         $request->validate([
             'name'  => 'required|string|max:255',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users,email,' . $user->id,
             'no_hp' => 'required|string|max:20',
         ]);
 
@@ -56,12 +74,19 @@ class AdminUserController extends Controller
             'no_hp' => $request->no_hp,
         ]);
 
-        return back()->with('success', 'Data siswa berhasil diperbarui');
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Admin berhasil diperbarui',
+            'data' => $user
+        ]);
     }
 
     public function destroy(User $user)
     {
         $user->delete();
-        return back()->with('success', 'Data siswa berhasil dihapus');
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Siswa berhasil dihapus'
+        ]);
     }
 }

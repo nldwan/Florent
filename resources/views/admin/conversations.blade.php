@@ -4,31 +4,51 @@
 @section('content')
 
 <style>
-.page-title {
-    font-weight: 600;
-    letter-spacing: .3px;
-}
-.card {
-    border-radius: 14px;
-}
-table th {
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    color: #6c757d;
-}
-table td {
-    vertical-align: middle;
-    font-size: 0.95rem;
-}
-.btn {
-    border-radius: 8px;
-}
-.custom-modal {
-    border-radius: 14px;
-}
+    .page-title {
+        font-weight: 600;
+        letter-spacing: .3px;
+    }
+    .card {
+        border-radius: 14px;
+    }
+    table th {
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        color: #6c757d;
+    }
+    table td {
+        vertical-align: middle;
+        font-size: 0.95rem;
+    }
+    .btn {
+        border-radius: 8px;
+    }
+    .custom-modal {
+        border-radius: 14px;
+    }
+
+    /* Responsive header */
+    .d-flex.justify-content-between.align-items-center.mb-4.flex-wrap.gap-2 {
+        flex-wrap: wrap;
+    }
+
+    /* Tombol action tetap kecil tapi pindah baris kalau sempit */
+    td.d-flex.flex-wrap > .btn {
+        flex: 0 0 auto; /* jangan melebar */
+    }
+    td.d-flex.flex-wrap {
+        gap: 0.25rem;
+    }
+
+    /* Modal footer tombol tetap kecil */
+    .modal-footer.flex-wrap > .btn {
+        flex: 0 0 auto;
+        margin-bottom: 0.25rem;
+    }
 </style>
 
-<div class="d-flex justify-content-between align-items-center mb-4">
+
+<div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
     <h4 class="page-title">Conversation</h4>
     <a href="{{ route('admin.conversations.create') }}" class="btn btn-primary btn-sm">
         <i class="bi bi-plus-lg"></i> Add Conversation
@@ -58,7 +78,7 @@ table td {
                             View
                         </a>
                     </td>
-                    <td>
+                    <td class="d-flex gap-1 flex-wrap">
                         <button class="btn btn-warning btn-sm"
                             data-bs-toggle="modal"
                             data-bs-target="#edit{{ $conversation->id }}">
@@ -115,7 +135,7 @@ table td {
                                     </div>
                                 </div>
 
-                                <div class="modal-footer">
+                                <div class="modal-footer flex-wrap gap-2">
                                     <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">
                                         Cancel
                                     </button>

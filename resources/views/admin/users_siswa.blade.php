@@ -4,6 +4,9 @@
 @section('content')
 
 <style>
+    /* =======================
+       GLOBAL & TYPOGRAPHY
+    ======================= */
     .page-title {
         font-weight: 600;
         letter-spacing: .3px;
@@ -25,17 +28,16 @@
         font-size: 0.95rem;
     }
 
-    .custom-modal .modal-header,
-    .custom-modal .modal-footer {
-        border-color: #f0f0f0;
-    }
-
     .btn {
         border-radius: 8px;
     }
 
-    .form-group {
-        margin-bottom: 16px;
+    /* =======================
+       MODAL STYLING
+    ======================= */
+    .custom-modal .modal-header,
+    .custom-modal .modal-footer {
+        border-color: #f0f0f0;
     }
 
     .custom-modal {
@@ -64,11 +66,49 @@
     .modal-lg {
         --bs-modal-width: 600px;
     }
+
+    .form-group {
+        margin-bottom: 16px;
+    }
+
+    /* =======================
+       RESPONSIVE TABLE
+    ======================= */
+    @media (max-width: 768px) {
+        .table-responsive {
+            overflow-x: auto;
+        }
+        table th, table td {
+            white-space: nowrap;
+        }
+        .page-title {
+            font-size: 1rem;
+        }
+        .btn-sm {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .card {
+            padding: 0.5rem;
+        }
+        .modal-lg {
+            --bs-modal-width: 90%;
+        }
+        .form-control {
+            font-size: 0.85rem;
+        }
+        .page-title {
+            font-size: 0.95rem;
+        }
+    }
 </style>
 
-<div class="d-flex justify-content-between align-items-center mb-4">
+<div class="d-flex flex-row justify-content-between align-items-center mb-4 flex-wrap gap-2">
     <h4 class="page-title">Siswa Accounts</h4>
-    <a href="{{ route('admin.users.siswa.create') }}" class="btn btn-primary btn-sm">
+    <a href="{{ route('admin.users.siswa.create') }}" class="btn btn-primary btn-sm ms-auto">
         <i class="bi bi-plus-lg"></i> Add Siswa
     </a>
 </div>
@@ -92,7 +132,7 @@
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->no_hp }}</td>
-                    <td>
+                    <td class="d-flex gap-1 flex-wrap">
                         <button class="btn btn-warning btn-sm"
                             data-bs-toggle="modal"
                             data-bs-target="#editUser{{ $user->id }}">
@@ -141,13 +181,6 @@
                                         <input type="text" name="no_hp"
                                             class="form-control"
                                             value="{{ $user->no_hp }}" required>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Password (optional)</label>
-                                        <input type="password" name="password"
-                                            class="form-control"
-                                            placeholder="Leave blank if unchanged">
                                     </div>
                                 </div>
 
@@ -210,12 +243,7 @@ function deleteSiswa(id) {
                 showConfirmButton: false
             });
 
-            // HAPUS ROW DARI TABLE
-            document
-                .querySelector(`button[onclick="confirmDelete(${id})"]`)
-                .closest('tr')
-                .remove();
-
+            document.querySelector(`#row-${id}`).remove();
         } else {
             Swal.fire('Error', data.message, 'error');
         }
@@ -224,9 +252,7 @@ function deleteSiswa(id) {
         Swal.fire('Error', 'Terjadi kesalahan server', 'error');
     });
 }
-</script>
 
-<script>
 document.querySelectorAll('.edit-form').forEach(form => {
     form.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -247,18 +273,14 @@ document.querySelectorAll('.edit-form').forEach(form => {
         .then(res => res.json())
         .then(data => {
             if (data.status === 'success') {
-
-                // Update tabel
                 document.querySelector(`#row-${id} td:nth-child(2)`).innerText = data.data.name;
                 document.querySelector(`#row-${id} td:nth-child(3)`).innerText = data.data.email;
                 document.querySelector(`#row-${id} td:nth-child(4)`).innerText = data.data.no_hp;
 
-                // Tutup modal
                 bootstrap.Modal.getInstance(
                     this.closest('.modal')
                 ).hide();
 
-                // SweetAlert sukses
                 Swal.fire({
                     icon: 'success',
                     title: 'Updated!',

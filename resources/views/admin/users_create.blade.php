@@ -46,6 +46,16 @@
             @csrf
 
             <div class="mb-3">
+                <label>Course</label>
+                <select name="course_id" class="form-control" required>
+                    <option value="" disabled selected>-- Pilih Course --</option>
+                    @foreach($courses as $course)
+                        <option value="{{ $course->id }}">{{ $course->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="mb-3">
                 <label>Name</label>
                 <input type="text" name="name"
                        class="form-control"
@@ -61,7 +71,7 @@
                        required>
             </div>
 
-            <div>
+            <div class="mb-3">
                 <label>Phone Number</label>
                 <input type="text" name="no_hp"
                        class="form-control"
@@ -69,7 +79,7 @@
                        required>
             </div>
 
-            <div class="mb-4">
+            <div class="mb-3">
                 <label>Password</label>
                 <input type="password" name="password"
                        class="form-control"

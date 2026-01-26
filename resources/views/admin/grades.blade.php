@@ -66,7 +66,7 @@ table td {
                             {{ $grade->status }}
                         </span>
                     </td>
-                    <td>
+                    <td class="d-flex gap-1 flex-wrap">
                         <button class="btn btn-warning btn-sm"
                             data-bs-toggle="modal"
                             data-bs-target="#edit{{ $grade->id }}">
