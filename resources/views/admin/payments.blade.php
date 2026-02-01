@@ -28,12 +28,22 @@ table td {
     font-size: 0.85rem;
     padding: 0.4em 0.6em;
     border-radius: 8px;
-    font-weight: 600;
+}
+.btn-paid {
+    background-color: #10b981;
+    color: #fff;
+}
+.btn-pending {
+    background-color: #f59e0b;
+    color: #fff;
 }
 </style>
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h4 class="page-title">Laporan Pembayaran Siswa</h4>
+<div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
+    <h4 class="page-title mb-0">Laporan Pembayaran Siswa</h4>
+    <a href="{{ route('admin.payments.create') }}" class="btn btn-primary btn-sm ms-auto">
+        <i class="bi bi-plus-lg"></i> Add Admin
+    </a>
 </div>
 
 <div class="card border-0 shadow-sm">
@@ -41,10 +51,11 @@ table td {
         <table class="table table-hover align-middle mb-0">
             <thead class="table-light">
                 <tr>
-                    <th>#</th>
+                    <th>No.</th>
                     <th>Nama Siswa</th>
                     <th>Bulan</th>
                     <th>Jumlah</th>
+                    <th>Metode</th>
                     <th>Status</th>
                     <th>Tanggal</th>
                 </tr>
@@ -56,10 +67,11 @@ table td {
                     <td>{{ $payment->user->name }}</td>
                     <td>{{ $payment->month }}</td>
                     <td>Rp {{ number_format($payment->amount, 0, ',', '.') }}</td>
+                    <td>{{ strtoupper($payment->method) }}</td>
                     <td>
                         <span class="badge-status 
-                            @if($payment->status == 'paid') bg-success
-                            @elseif($payment->status == 'pending') bg-warning text-dark
+                            @if($payment->status == 'paid') btn-paid
+                            @elseif($payment->status == 'pending') btn-pending
                             @else bg-danger
                             @endif
                         ">

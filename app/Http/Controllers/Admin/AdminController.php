@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Conversation;
 use App\Models\Material;
 use App\Models\User;
 use App\Models\Payment;
@@ -18,7 +19,7 @@ class AdminController extends Controller
         $userCount = User::where('role', 'siswa')->count();
         $adminCount = User::where('role', 'admin')->count();
         $materialCount = Material::count();
-        $coursesCount = Course::count();
+        $conversationCount = Conversation::count();
 
         // ===== Grafik Payment Paid per bulan =====
         $payments = Payment::selectRaw('MONTH(created_at) as month, SUM(amount) as total')
@@ -37,10 +38,6 @@ class AdminController extends Controller
             ->orderByRaw('MONTH(created_at)')
             ->pluck('total', 'month')
             ->toArray();
-
-        // ===== Grafik Pending vs Paid Payment =====
-        $paidCount = Payment::where('status','paid')->count();
-        $pendingCount = Payment::where('status','pending')->count();
 
         // ===== Jumlah Siswa per Course =====
         $studentsPerCourse = Course::withCount(['users as siswa_count' => function($query){
@@ -61,9 +58,8 @@ class AdminController extends Controller
         }
 
         return view('admin.dashboard', compact(
-            'userCount', 'adminCount', 'materialCount', 'coursesCount',
+            'userCount', 'adminCount', 'materialCount', 'conversationCount',
             'labels', 'paymentData', 'studentData',
-            'paidCount', 'pendingCount',
             'courseLabels', 'courseData'
         ));
     }

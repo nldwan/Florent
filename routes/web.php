@@ -145,6 +145,8 @@ Route::prefix('admin')->middleware(['auth','role:admin'])->group(function() {
 
     // Payments
     Route::get('/admin/payments', [AdminPaymentController::class, 'index'])->name('admin.payments.index');
+    Route::get('/admin/payments/create', [AdminPaymentController::class, 'create'])->name('admin.payments.create');
+    Route::post('/admin/payments', [AdminPaymentController::class, 'store'])->name('admin.payments.store');
 
     Route::post('/logout', function() {
         Auth::logout();

@@ -347,7 +347,6 @@
 
 <script src="https://app.sandbox.midtrans.com/snap/snap.js"
         data-client-key="{{ env('MIDTRANS_CLIENT_KEY') }}"></script>
-
 <script>
 document.getElementById('pay-button')?.addEventListener('click', function () {
     fetch("{{ route('siswa.payment.create') }}", {

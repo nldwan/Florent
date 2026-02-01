@@ -16,4 +16,36 @@ class AdminPaymentController extends Controller
 
         return view('admin.payments', compact('payments'));
     }
+
+    public function create()
+    {
+        return view('admin.payments_create');
+    }
+    
+    public function store(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'month' => 'required',
+            'amount' => 'required|numeric',
+            'method' => 'required|in:cash,transfer',
+        ]);
+
+        // LOGIKA STATUS
+        $status = $request->method === 'cash'
+            ? 'paid'
+            : 'pending';
+
+        Payment::create([
+            'user_id' => $request->user_id,
+            'order_id' => strtoupper($request->method) . '-' . time(),
+            'month' => $request->month,
+            'amount' => $request->amount,
+            'method' => $request->method,
+            'status' => $status,
+        ]);
+
+        return redirect()->route('admin.payments.index')
+            ->with('success', 'Pembayaran berhasil disimpan');
+    }
 }

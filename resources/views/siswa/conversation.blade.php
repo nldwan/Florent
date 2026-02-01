@@ -60,12 +60,9 @@
     }
 </style>
 
-<div class="container mx-auto px-4">
+<div class="container py-5">
 
-    <h2 class="text-3xl font-semibold mb-6 text-gray-800 border-b pb-2">
-        Conversation Videos
-    </h2>
-
+    <h2 class="text-center fw-bold mb-5" style="color:#1f2937;">Video Conversation</h2>
     <div class="video-grid">
         @foreach($conversations as $c)
             <div class="video-card">

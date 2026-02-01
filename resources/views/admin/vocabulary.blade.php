@@ -86,7 +86,7 @@
         <table class="table table-hover align-middle mb-0">
             <thead class="table-light">
                 <tr>
-                    <th>#</th>
+                    <th>No.</th>
                     <th>Verb 1</th>
                     <th>Verb 2</th>
                     <th>Verb 3</th>

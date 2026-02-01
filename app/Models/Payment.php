@@ -14,6 +14,7 @@ class Payment extends Model
         'order_id',
         'month',
         'amount',
+        'method',
         'status'
     ];
 

@@ -13,7 +13,7 @@ class PaymentController extends Controller
     {
         // SETTING MIDTRANS (LANGSUNG DARI ENV)
         Config::$serverKey = env('MIDTRANS_SERVER_KEY');
-        Config::$isProduction = env('MIDTRANS_IS_PRODUCTION', false);
+        Config::$isProduction = false;
         Config::$isSanitized = true;
         Config::$is3ds = true;
 
@@ -24,7 +24,8 @@ class PaymentController extends Controller
             'user_id' => auth()->id(),
             'order_id' => $orderId,
             'month' => now()->format('Y-m'),
-            'amount' => 350000, // bebas, bisa dari request
+            'amount' => 350000,
+            'method' => 'transfer',
             'status' => 'pending',
         ]);
 
