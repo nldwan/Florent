@@ -150,7 +150,7 @@ Route::prefix('admin')->middleware(['auth','role:admin'])->group(function() {
 
     Route::post('/logout', function() {
         Auth::logout();
-        return redirect('admin.login'); // atau halaman welcome
+        return redirect('admin.login');
     })->name('admin.logout');
     
 });

@@ -127,7 +127,7 @@
     <!-- Charts (IN CARD) -->
 <div class="charts-wrapper">
     <div class="chart-card full">
-        <h3>Laporan Keuangan (Paid)</h3>
+        <h3>Laporan Keuangan</h3>
         <canvas id="paymentChart"></canvas>
     </div>
 

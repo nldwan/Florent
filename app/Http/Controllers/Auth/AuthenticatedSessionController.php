@@ -29,15 +29,14 @@ class AuthenticatedSessionController extends Controller
             'password' => ['required', 'string'],
         ]);
 
-        if (Auth::attempt($credentials, $request->boolean('remember'))) {
-            $request->session()->regenerate();
+        if (Auth::attempt([
+            'email' => $request->email,
+            'password' => $request->password,
+            'role' => 'siswa',
+        ], $request->boolean('remember'))) {
 
-            // Cek role dan redirect sesuai
-            if (Auth::user()->role === 'admin') {
-                return redirect()->route('admin.dashboard');
-            } else {
-                return redirect()->route('siswa.dashboard');
-            }
+            $request->session()->regenerate();
+            return redirect()->route('siswa.dashboard');
         }
 
         return back()->withErrors([

@@ -40,9 +40,9 @@ table td {
 </style>
 
 <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
-    <h4 class="page-title mb-0">Laporan Pembayaran Siswa</h4>
+    <h4 class="page-title mb-0">Report Payment</h4>
     <a href="{{ route('admin.payments.create') }}" class="btn btn-primary btn-sm ms-auto">
-        <i class="bi bi-plus-lg"></i> Add Admin
+        <i class="bi bi-plus-lg"></i> Add Payment
     </a>
 </div>
 
